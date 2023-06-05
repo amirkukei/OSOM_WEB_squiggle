@@ -9,12 +9,11 @@ canvas.width = window.innerWidth - canvasOffsetX;
 canvas.height = window.innerHeight - canvasOffsetY;
 
 let isPainting = false;
-let lineWidth = 5;
 let startX;
 let startY;
 let brushSizes =[5,10,15];
 let currentBrushSizeIndex = 0;
-
+let lineWidth = brushSizes[currentBrushSizeIndex];
 
 function openColorPicker() {
       // Open the color picker
@@ -23,6 +22,13 @@ function openColorPicker() {
     }
 
 function toggleBrushSize(){
+    currentBrushSizeIndex = (currentBrushSizeIndex + 1) % brushSizes.length;
+    let brushSizesStr =["S","M","L"];
+    let newBrushSize = brushSizesStr[currentBrushSizeIndex];
+    let button = document.getElementById("brush");
+      button.textContent = "Brush: " + newBrushSize;
+      lineWidth =brushSizes[currentBrushSizeIndex];
+
 
 }
 function handleSaveButtonClick() {
@@ -98,7 +104,7 @@ toolbar.addEventListener('click', e => {
     }
     if (e.target.id ==='brush'){
 
-        openLineWidth();
+        toggleBrushSize();
 
     }
 });
