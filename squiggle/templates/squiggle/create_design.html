@@ -13,50 +13,43 @@
 
 
         <section class="container">
-        <div id="toolbar">
+
+
+
+        <div class="toolbar" id="toolbar">
 
             <div><label for="stroke">Stroke</label>
-        <input id="stroke" name='stroke' type="color"> </div>
+                <input id="stroke" name='stroke' type="color"></div>
 
-        <div><label for="lineWidth">Line Width</label>
-        <input id="lineWidth" name='lineWidth' type="number" value="5"> </div>
+            <div><label for="lineWidth">Line Width</label>
+                 </div>
+            <input id="lineWidth" name='lineWidth' type="number" value="5" min="1" max="100" style="display:none;">
+            <button id="brush">Brush Size</button>
 
-        <div><button id="clear">Clear</button> </div>
+            <label for="colorPicker"></label><input id="colorPicker" type="color" style="display: none;">
+            <button id="color">Pick a Color</button>
 
-         </div>
 
+            <button id="text">Add Text</button>
+
+            <button id="clear">Clear Canvas</button>
+
+            <button id="save">Save Image</button>
+
+            <button id="load">Load Image</button>
+
+            <button id="login">Sign In</button>
+
+
+
+
+        </div>
             <div>
             <canvas id="drawing-board"></canvas>
             </div>
+
         </section>
 
-    <section id="color-picker">
-      <!-- Color picker for selecting paint color -->
-      <input type="color" id="color-picker-input">
-    </section>
-
-    <section id="brush-size">
-      <!-- Brush size selector -->
-      <label for="brush-size-input">Brush Size:</label>
-      <input type="number" id="brush-size-input" min="1" max="100">
-        <button id="clear-canvas">Clear Canvas</button>
-      <button id="save-image">Save Image</button>
-
-    </section>
-
-        <section id="tools">
-      <!-- Additional tools or options -->
-      <!-- Add your tools or options here -->
-    </section>
-
-    <section id="controls">
-      <!-- Controls for interacting with the painting application -->
-
-    </section>
-
-    <button id="submit">Create Design</button>
-
-    </main>
 
     <footer>
     <!-- Add footer content if needed -->
