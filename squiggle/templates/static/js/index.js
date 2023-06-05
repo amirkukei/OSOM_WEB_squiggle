@@ -132,4 +132,15 @@ canvas.addEventListener('mouseup', e => {
 });
 
 canvas.addEventListener('mousemove', draw);
-
+function showAlert(){
+    var myText = "squiggleWEAR &copy;OSOM 2023\n squiggle you happy\n wear your art\n brought to you with love by\n amir iakupov\n elena corbeanu \n janella gatmaitan\n";
+    alert (myText);
+}
+function toggleBrushSize(){
+    currentBrushSizeIndex = (currentBrushSizeIndex + 1) % brushSizes.length;
+    let brushSizesStr =["S","M","L"];
+    let newBrushSize = brushSizesStr[currentBrushSizeIndex];
+    let button = document.getElementById("brush");
+      button.textContent = "Brush: " + newBrushSize;
+      lineWidth =brushSizes[currentBrushSizeIndex];
+}

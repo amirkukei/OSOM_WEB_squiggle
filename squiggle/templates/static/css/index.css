@@ -20,6 +20,7 @@ h1 {
 .toolbar{
     	float: right;
 }
+
 #toolbar {
     display: flex;
     flex-direction: column;
@@ -27,6 +28,7 @@ h1 {
     width: 150px;
     background-color: transparent;
     position: absolute;
+      right: 0;
     margin-top: 5px;
     margin-bottom: 6px;
 }
@@ -81,18 +83,20 @@ h1 {
     background-color: deepskyblue;
              }
 #save {
-    background-color: yellow;
+    background-color: gold;
              }
 #load {
     background-color: aquamarine;
              }
 #print {
-    background-color: red;
+    background-color: #f36a6a;
              }
 #login {
     background-color: violet;
 }
-
+#about {
+    background-color: yellow;
+}
 .container {
     height: 100%;
     display: flex;

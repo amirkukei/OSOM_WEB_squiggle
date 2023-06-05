@@ -1,0 +1,38 @@
+      {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>squiggleWEAR!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/squiggle/templates/static/css/index.css">
+</head>
+
+<body>
+        <section class="container">
+        <div class="toolbar" id="toolbar">
+            <h1 id="branding">squiggleWEAR</h1>
+            <button id="brush">Brush: S</button>
+            <label for="colorPicker"></label><input id="colorPicker" type="color" style="display: none;">
+            <button id="color">Color</button>
+            <button id="text">Text</button>
+            <button id="clear">Clear</button>
+            <button id="save">Save</button>
+            <button id="load">Load</button>
+            <button id="print">Print Shirt</button>
+            <button id="login">Login</button>
+            <button id="about" onclick="showAlert()">About</button>
+        </div>
+            <div>
+            <canvas id="drawing-board"></canvas>
+            </div>
+        </section>
+
+    <footer>
+    <!-- Add footer content if needed -->
+    </footer>
+
+<script type="text/javascript" src="{%static 'js/index.js' %}"></script>
+</body>
+</html>
