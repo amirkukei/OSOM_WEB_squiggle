@@ -17,20 +17,16 @@ h1 {
     -webkit-text-fill-color: transparent;
 }
 
-.container {
-    height: 100%;
-    display: flex;
+.toolbar{
+    	float: right;
 }
-
 #toolbar {
     display: flex;
     flex-direction: column;
     padding: 20px;
     width: 150px;
-    background-color: #FFFFFF;
-}
-
-#toolbar {
+    background-color: transparent;
+    position: absolute;
     margin-top: 5px;
     margin-bottom: 6px;
 }
@@ -39,11 +35,8 @@ h1 {
     font-size: 12px;
 }
 
-#toolbar input {
-    width: 100%;
-}
 
-#toolbar button {
+#toolbar button{
   /*  background-color: #1565c0;*/
     border: white;
     border-radius: 50px;
@@ -64,7 +57,7 @@ h1 {
   border: none;
   border-radius: 15px;
   /*box-shadow: 0 9px #999;*/
-  margin: 20px;
+  margin: 10px;
 }
 
 .toolbar button:hover {background-color: #3e8e41}
@@ -100,3 +93,7 @@ h1 {
     background-color: violet;
 }
 
+.container {
+    height: 100%;
+    display: flex;
+}
