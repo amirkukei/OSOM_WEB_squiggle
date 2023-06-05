@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Design, Order
 
-def create_design(request):
+def index(request):
     if request.method == 'POST':
         return redirect('design_list')
     else:
-        return render(request, 'create_design.html')
+        return render(request, 'static/index.html')
 
 def design_list(request):
     designs = Design.objects.all()
