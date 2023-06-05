@@ -7,9 +7,11 @@ body {
 }
 
 h1 {
+    font-size: 20px;
+    text-align: center;
     background: #7F7FD5;
-    background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-    background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+    background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #c27fd5);
+    background: linear-gradient(to right, #91EAE4, #86A8E7, #bd5fec);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -25,10 +27,11 @@ h1 {
     flex-direction: column;
     padding: 20px;
     width: 150px;
-    background-color: #606060;
+    background-color: #FFFFFF;
 }
 
-#toolbar * {
+#toolbar {
+    margin-top: 5px;
     margin-bottom: 6px;
 }
 
@@ -41,11 +44,11 @@ h1 {
 }
 
 #toolbar button {
-    background-color: #1565c0;
+  /*  background-color: #1565c0;*/
     border: white;
-    border-radius: 20px;
+    border-radius: 50px;
     color:white;
-    padding: 20px;
+    padding: 10px;
 }
 
 .toolbar button {
@@ -57,11 +60,11 @@ h1 {
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #4CAF50;
+ /* background-color: #4CAF50;*/
   border: none;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
-  margin: 10px;
+  /*box-shadow: 0 9px #999;*/
+  margin: 20px;
 }
 
 .toolbar button:hover {background-color: #3e8e41}
@@ -72,4 +75,28 @@ h1 {
   transform: translateY(4px);
 }
 
+#brush {
+    background-color: limegreen;
+             }
+#color {
+    background-color: hotpink;
+             }
+#text {
+    background-color: orange;
+             }
+#clear {
+    background-color: deepskyblue;
+             }
+#save {
+    background-color: yellow;
+             }
+#load {
+    background-color: aquamarine;
+             }
+#print {
+    background-color: red;
+             }
+#login {
+    background-color: violet;
+}
 

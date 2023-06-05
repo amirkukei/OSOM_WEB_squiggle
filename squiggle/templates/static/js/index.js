@@ -28,13 +28,12 @@ function toggleBrushSize(){
     let button = document.getElementById("brush");
       button.textContent = "Brush: " + newBrushSize;
       lineWidth =brushSizes[currentBrushSizeIndex];
-
-
 }
+
 function handleSaveButtonClick() {
     let data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
-    fetch('http://127.0.0.1:8000/design/create/', {
+    fetch('http://127.0.0.1:8000/design/create/', {//here we will write url to API-saveDrawings! localhost just a dummy!
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -59,7 +58,7 @@ function handleSaveButtonClick() {
 
 function handleLoadButtonClick() {
   // Make a GET request to the server
-  fetch('http://127.0.0.1:8000/design/create/')
+  fetch('http://127.0.0.1:8000/design/create/')//here we will write url to get API-savedDrawings! localhost just a dummy!
     .then(response => {
       if (response.ok) {
         // Get the response data as JSON
@@ -79,33 +78,22 @@ function handleLoadButtonClick() {
     });
 }
 
-
-
 toolbar.addEventListener('click', e => {
     if (e.target.id === 'clear') {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
     if (e.target.id==='save'){
-
         handleSaveButtonClick();
-
-
     }
     if (e.target.id ==='load'){
-
         handleLoadButtonClick();
-
     }
     if (e.target.id ==='color'){
-
         openColorPicker();
-
     }
     if (e.target.id ==='brush'){
-
         toggleBrushSize();
-
     }
 });
 
@@ -127,7 +115,6 @@ const draw = (e) => {
 
     ctx.lineWidth = lineWidth;
     ctx.lineCap = 'round';
-
     ctx.lineTo(e.clientX - canvasOffsetX, e.clientY);
     ctx.stroke();
 }
