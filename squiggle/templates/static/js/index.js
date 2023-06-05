@@ -132,9 +132,10 @@ canvas.addEventListener('mouseup', e => {
 });
 
 canvas.addEventListener('mousemove', draw);
-function showAlert(){
-    var myText = "squiggleWEAR &copy;OSOM 2023\n squiggle you happy\n wear your art\n brought to you with love by\n amir iakupov\n elena corbeanu \n janella gatmaitan\n";
-    alert (myText);
+function showAlert() {
+     var myText = "\n\nsquiggleWEAR © OSOM 2023\n\n\n            squiggle you happy\n\n        wear your art\n\n\nbrought to you with love by\n    amir iakupov\n    elena corbeanu \n    janella gatmaitan\n";
+      alert (myText);
+ //   location.href = '/squiggle/about.html'
 }
 function toggleBrushSize(){
     currentBrushSizeIndex = (currentBrushSizeIndex + 1) % brushSizes.length;

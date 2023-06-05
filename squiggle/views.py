@@ -5,7 +5,9 @@ def index(request):
     if request.method == 'POST':
         return redirect('design_list')
     else:
-        return render(request, 'static/index.html')
+        return render(request, 'index.html')
+def about(request):
+        return render(request, 'about.html')
 
 def design_list(request):
     designs = Design.objects.all()
