@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Registration</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,11 +65,12 @@
 <body>
     <div class="container">
         <div class="card">
-            <h2>Login</h2>
-            <form action="" method="post">
-                {{ form.as_p }}
+            <h1>Create an account</h1>
+            <p>Please, sign up using the following form:</p>
+            <form method="post">
+                {{ user_form.as_p }}
                 {% csrf_token %}
-                <p><input type="submit" value="Login"></p>
+                <p><input type="submit" value="Create my account"></p>
             </form>
         </div>
     </div>

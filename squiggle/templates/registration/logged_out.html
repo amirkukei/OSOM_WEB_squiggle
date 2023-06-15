@@ -65,12 +65,10 @@
 <body>
     <div class="container">
         <div class="card">
-            <h2>Login</h2>
-            <form action="" method="post">
-                {{ form.as_p }}
-                {% csrf_token %}
-                <p><input type="submit" value="Login"></p>
-            </form>
+            <p>
+                You have been successfully logged out.
+                You can <a href="{% url 'login' %}">login again</a>.
+            </p>
         </div>
     </div>
 </body>

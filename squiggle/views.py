@@ -1,5 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Design, Order
+from .forms import LoginForm, UserRegistrationForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     if request.method == 'POST':
@@ -26,3 +30,33 @@ def order_list(request):
 def view_order(request, order_id):
     order = Order.objects.get(id=order_id)
     return render(request, 'view_order.html', {'order': order})
+
+def user_login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request, username=cd['username'], password=cd['password'])
+            if user is not None:
+
+                login(request, user)
+                return redirect('index')
+
+            else:
+                return HttpResponse('Something went wrong')
+    else:
+        form = LoginForm()
+    return render(request, 'squiggle/login.html', {'form': form})
+
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.save()
+            return render(request,'squiggle/register_done.html', {'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'squiggle/register.html',{'user_form': user_form})
