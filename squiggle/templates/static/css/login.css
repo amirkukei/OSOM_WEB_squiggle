@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-    <style>
-        body {
+ body {
             font-family: Arial, sans-serif;
             background-color: #f6f8fa;
         }
@@ -60,18 +55,3 @@
         .form-group button:hover {
             background-color: #0069d9;
         }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="card">
-            <h2>Login</h2>
-            <form action="" method="post">
-                {{ form.as_p }}
-                {% csrf_token %}
-                <p><input type="submit" value="Login"></p>
-            </form>
-        </div>
-    </div>
-</body>
-</html>

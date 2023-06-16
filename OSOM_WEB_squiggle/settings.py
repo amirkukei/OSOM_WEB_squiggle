@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ezt#d898#2jw!7h@3*)&-4m#u%bk(0(7&0*^h%fxj)#wv%+rx5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'squiggle',
     'django.contrib.admin',
-
 ]
 
 MIDDLEWARE = [
@@ -58,7 +57,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'squiggle/templates/squiggle']
+        'DIRS': [BASE_DIR / 'squiggle/templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {

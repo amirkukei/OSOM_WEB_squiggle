@@ -46,7 +46,7 @@ def user_login(request):
                 return HttpResponse('Something went wrong')
     else:
         form = LoginForm()
-    return render(request, 'squiggle/login.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
 
 
 def register(request):
@@ -56,7 +56,7 @@ def register(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            return render(request,'squiggle/register_done.html', {'new_user': new_user})
+            return render(request, 'squiggle/templates/register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
-    return render(request, 'squiggle/register.html',{'user_form': user_form})
+    return render(request, 'squiggle/templates/register.html', {'user_form': user_form})
