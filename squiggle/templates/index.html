@@ -11,6 +11,8 @@
 </head>
 
 <body>
+{% load socialaccount %}
+
 <section class="container">
 
     <div class="toolbar" id="toolbar">
@@ -22,10 +24,17 @@
        <!-- <button id="text">Text</button>-->
         <button id="clear">Clear</button>
         <button id="save">Save</button>
-        <button id="load">Load</button>
+        <button id="load" onclick="location.href='{% url 'load_drawings' %}'" >Download</button>
         <button id="print">Print Shirt</button>
         <button id="login" onclick="location.href='{% url 'login' %}'">Login</button>
         <button id="about" onclick="location.href='{% url 'about' %}'">About</button>
+
+        <h2>Google Login</h2>
+    <a href="{% provider_login_url 'google' %}?next=/">Login with Google</a>
+        {% if user.is_authenticated %}
+    <p>You are signed in as {{ user.email }}</p>
+    <a href ="logout">Logout</a>
+{% endif %}
         <img src="squiggle/templates/static/images/squiggleHERO8.png">
     </div>
 
@@ -41,6 +50,13 @@
     <!-- Add footer content if needed -->
 </footer>
 
+<form>
+  {% csrf_token %}
+  <!-- other form fields -->
+</form>
+
 <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 </body>
 </html>

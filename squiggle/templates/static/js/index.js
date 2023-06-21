@@ -1,3 +1,5 @@
+
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 const canvas = document.getElementById('drawing-board');
 const toolbar = document.getElementById('toolbar');
 const ctx = canvas.getContext('2d');
@@ -15,6 +17,8 @@ let brushSizes =[5,10,15];
 let currentBrushSizeIndex = 0;
 let lineWidth = brushSizes[currentBrushSizeIndex];
 
+
+
 function openColorPicker() {
       // Open the color picker
     const colorPicker = document.getElementById("colorPicker");
@@ -31,52 +35,60 @@ function toggleBrushSize(){
 }
 
 function handleSaveButtonClick() {
-    let data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
-    fetch('http://127.0.0.1:8000/design/create/', {//here we will write url to API-saveDrawings! localhost just a dummy!
+   // let id_token = googleUser.getAuthResponse().id_token;
+
+    //want to convert canvas content into Data URI base64 encode string representing content of the canvas
+    const dataURI = canvas.toDataURL();
+
+    console.log(dataURI);
+
+    if(window.navigator.msSaveBlob){
+        window.navigator.msSaveBlob(canvas.msToBlob(),"canvas.png");
+    }else{
+        const a =document.createElement("a");
+        //document.body.appendChild(a);
+        a.href= canvas.toDataURL();
+        a.download="canvas.png";
+        a.click();
+        //document.body.removeChild(a);
+    }
+
+    const drawingData = canvas.toDataURL();
+
+    fetch('save_canvas/', {//here we will write url to API-saveDrawings! localhost just a dummy!
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
       // Add any additional headers if required
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({drawing_data: drawingData}),
   })
-    .then(response => {
-      if (response.ok) {
-        // Request was successful
-        console.log('Data saved successfully');
-      } else {
-        // Handle error response
-        console.error('Error saving data');
-      }
-    })
-    .catch(error => {
-      // Handle network or other errors
-      console.error('Error:', error);
-    });
+    .then(response => response.json())
+  .then(data => {
+    // Handle the response from the backend
+    console.log(data);
+  })
+
 }
 
 function handleLoadButtonClick() {
-  // Make a GET request to the server
-  fetch('http://127.0.0.1:8000/design/create/')//here we will write url to get API-savedDrawings! localhost just a dummy!
-    .then(response => {
-      if (response.ok) {
-        // Get the response data as JSON
-        return response.json();
-      } else {
-        // Handle error response
-        throw new Error('Error loading data');
-      }
-    })
-    .then(data => {
-      // Handle the retrieved data
-      console.log('Data loaded:', data);
-    })
-    .catch(error => {
-      // Handle network or other errors
-      console.error('Error:', error);
-    });
+    /*fetch('load_drawings/')
+        .then(response=>response.json()).then(data => {
+        data.forEach(drawingData=> {
+            let image = new Image();
+
+            image.src =drawingData.drawing_data;
+
+            image.onload=function(){
+                ctx.drawImage(image, 0, 0);
+            };
+        });
+    })*/
+
 }
+
 
 toolbar.addEventListener('click', e => {
     if (e.target.id === 'clear') {
@@ -137,11 +149,10 @@ function showAlert() {
       alert (myText);
  //   location.href = '/squiggle/about.html'
 }
-function toggleBrushSize(){
-    currentBrushSizeIndex = (currentBrushSizeIndex + 1) % brushSizes.length;
-    let brushSizesStr =["S","M","L"];
-    let newBrushSize = brushSizesStr[currentBrushSizeIndex];
-    let button = document.getElementById("brush");
-      button.textContent = "Brush: " + newBrushSize;
-      lineWidth =brushSizes[currentBrushSizeIndex];
+ function onSignIn(googleUser) {
+     id_token = googleUser.getAuthResponse().id_token;
+
 }
+
+
+
