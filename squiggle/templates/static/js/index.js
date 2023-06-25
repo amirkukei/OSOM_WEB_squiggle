@@ -35,42 +35,31 @@ function toggleBrushSize(){
 }
 
 function handleSaveButtonClick() {
-
-   // let id_token = googleUser.getAuthResponse().id_token;
-
-    //want to convert canvas content into Data URI base64 encode string representing content of the canvas
-    const dataURI = canvas.toDataURL();
-
-    console.log(dataURI);
-
-    if(window.navigator.msSaveBlob){
-        window.navigator.msSaveBlob(canvas.msToBlob(),"canvas.png");
-    }else{
-        const a =document.createElement("a");
-        //document.body.appendChild(a);
-        a.href= canvas.toDataURL();
-        a.download="canvas.png";
-        a.click();
-        //document.body.removeChild(a);
-    }
-
     const drawingData = canvas.toDataURL();
 
-    fetch('save_canvas/', {//here we will write url to API-saveDrawings! localhost just a dummy!
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-        'X-CSRFToken': csrftoken
-      // Add any additional headers if required
-    },
-    body: JSON.stringify({drawing_data: drawingData}),
-  })
-    .then(response => response.json())
-  .then(data => {
-    // Handle the response from the backend
-    console.log(data);
-  })
+    fetch('/save_canvas/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify({ drawingData: drawingData }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Processing the response from the server
+            if (data.success) {
+                console.log('The drawing is saved in the users gallery.');
+                // Output a message about successful save
+                window.location.href = '/gallery/';
+            } else if (data.error) {
+                console.error('Error saving picture:', data.error);
 
+            }
+        })
+        .catch(error => {
+            console.error('Error while executing AJAX request:', error);
+        });
 }
 
 function handleLoadButtonClick() {

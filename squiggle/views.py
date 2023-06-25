@@ -8,6 +8,11 @@ from .forms import LoginForm, UserRegistrationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.http import JsonResponse
+import xml.etree.ElementTree as ET
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 
 def index(request):
@@ -73,25 +78,26 @@ def register(request):
         user_form = UserRegistrationForm()
     return render(request, 'register.html', {'user_form': user_form})
 
+def logout_view(request):
+    logout(request)
+    return redirect("index")
 
 def save_canvas(request):
     if request.method == 'POST':
-        # drawing_data = request.POST.get('drawingData')
-        drawing_data = request.body
+        drawing_data = request.POST.get('drawing_data')
 
-        # Save the drawing data to the database
+        # Сохранить данные рисунка в базе данных
         drawing = Drawing(drawing_data=drawing_data, email=request.user.email)
         drawing.save()
 
         return JsonResponse({'success': True})
-        # return render(request, 'index.html')
     else:
         return JsonResponse({'error': 'Invalid request method'})
 
 
-def logout_view(request):
-    logout(request)
-    return redirect("index")
+def gallery(request):
+    drawings = Drawing.objects.filter(email=request.user.email)
+    return render(request, 'gallery.html', {'drawings': drawings})
 
 
 def load_drawings(request):
@@ -99,11 +105,10 @@ def load_drawings(request):
         email = request.user.email
         drawings = Drawing.objects.filter(email=email)
 
-        drawing_list = list(drawings.values())
+        drawing_list = [{'drawing_data': drawing.drawing_data} for drawing in drawings]
+        return JsonResponse(drawing_list, safe=False)
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
 
-        # Serialize as JSON
-        drawings_json = json.dumps(drawing_list, cls=DjangoJSONEncoder)
 
-        # Return JSON response
-        return JsonResponse(drawings_json, safe=False)
 

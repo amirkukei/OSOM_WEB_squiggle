@@ -31,6 +31,8 @@ class Tshirt(models.Model):
     design = models.ForeignKey(Design, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+def get_upload_path(instance, filename):
+    return 'drawings/{0}/{1}'.format(instance.email, filename)
 
 class Drawing(models.Model):
     email = models.CharField(max_length=50)

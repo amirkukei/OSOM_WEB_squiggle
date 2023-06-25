@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My gallery</title>
+    <style>
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .gallery-item {
+            width: 200px;
+            margin: 10px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="container">
+        {% for drawing in drawings %}
+        <div class="drawing">
+            <img src="{{ drawing.drawing_data.url }}" alt="Drawing">
+            <p>Created at: {{ drawing.created_at }}</p>
+        </div>
+        {% empty %}
+        <p>No drawings available.</p>
+        {% endfor %}
+    </section>
+
+</body>
+</html>
