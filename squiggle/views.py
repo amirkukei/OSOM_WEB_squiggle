@@ -95,8 +95,7 @@ def save_canvas(request):
     if request.method == 'POST':
         drawing_data = request.POST.get('drawing_data')
 
-        # Сохранить данные рисунка в базе данных
-        drawing = Drawing(drawing_data=drawing_data, email=request.user.email)
+        drawing = Drawing(drawing_data=drawing_data, email=request.user.email, name="New Design")
         drawing.save()
 
         return JsonResponse({'success': True})
@@ -118,6 +117,40 @@ def load_drawings(request):
         return JsonResponse(drawing_list, safe=False)
     else:
         return JsonResponse({'error': 'Invalid request method'})
+
+
+from django.http import JsonResponse
+
+def delete_drawing(request, drawing_id):
+    if request.method == 'DELETE':
+        try:
+            drawing = Drawing.objects.get(id=drawing_id)
+            drawing.delete()
+            return JsonResponse({'success': True})
+        except Drawing.DoesNotExist:
+            return JsonResponse({'error': 'Drawing not found'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+def update_drawing(request, drawing_id):
+    if request.method == 'PUT':
+        try:
+            drawing = Drawing.objects.get(id=drawing_id)
+            data = json.loads(request.body)
+            new_name = data.get('name')
+
+            if new_name:
+                drawing.name = new_name
+                drawing.save()
+
+                return JsonResponse({'success': True})
+            else:
+                return JsonResponse({'error': 'Invalid data'}, status=400)
+        except Drawing.DoesNotExist:
+            return JsonResponse({'error': 'Drawing not found'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+
 
 
 

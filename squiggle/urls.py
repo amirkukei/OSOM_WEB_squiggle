@@ -19,6 +19,11 @@ urlpatterns = [
     path('save_canvas/', views.save_canvas, name='save_canvas'),
     path('get_background_color/', views.get_background_color, name='get_background_color'),
 
+    path('delete_drawing/<int:drawing_id>/', views.delete_drawing, name='delete_drawing'),
+
+    path('update_drawing/<int:drawing_id>/', views.update_drawing, name='update_drawing'),
+
+
     path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
     path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('password-reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),

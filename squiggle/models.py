@@ -37,8 +37,11 @@ def get_upload_path(instance, filename):
 class Drawing(models.Model):
     email = models.CharField(max_length=50)
     drawing_data = models.TextField()
+    name = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
     def __str__(self):
         return str(self.created_at)
 
