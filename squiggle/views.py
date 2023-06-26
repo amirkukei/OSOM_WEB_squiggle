@@ -8,11 +8,10 @@ from .forms import LoginForm, UserRegistrationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.http import JsonResponse
+import requests
 import xml.etree.ElementTree as ET
 import json
 from django.core.serializers.json import DjangoJSONEncoder
-
 
 
 def index(request):
@@ -20,6 +19,16 @@ def index(request):
         return redirect('design_list')
     else:
         return render(request, 'index.html')
+
+def get_background_color(request):
+    if request.method == 'GET':
+        response = requests.get('https://www.thecolorapi.com/random')
+        if response.status_code == 200:
+            data = response.json()
+            background_color = data['hex']['value']
+            return JsonResponse({'background_color': background_color})
+
+    return JsonResponse({'error': 'Unable to fetch background color'})
 
 
 def about(request):

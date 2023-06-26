@@ -17,6 +17,7 @@ urlpatterns = [
 
     path('gallery/', views.gallery, name='gallery'),
     path('save_canvas/', views.save_canvas, name='save_canvas'),
+    path('get_background_color/', views.get_background_color, name='get_background_color'),
 
     path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
     path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),

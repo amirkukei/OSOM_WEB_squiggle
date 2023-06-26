@@ -91,18 +91,18 @@
     </script>
     <script>
 
-    document.getElementById('backgroundColor').addEventListener('click', function() {
-
-        fetch('https://www.thecolorapi.com/random')
-            .then(response => response.json())
-            .then(data => {
-                const backgroundColor = data.hex.value;
-                document.body.style.backgroundColor = backgroundColor;
-            })
-            .catch(error => {
-                console.log('Error:', error);
-            });
-    });
+         const backgroundColorButton = document.getElementById('backgroundColor');
+         backgroundColorButton.addEventListener('click', function() {
+             fetch('/get_background_color')
+                 .then(response => response.json())
+                 .then(data => {
+                     const backgroundColor = data.background_color;
+                     document.body.style.backgroundColor = backgroundColor;
+                 })
+                 .catch(error => {
+                     console.log('Error:', error);
+                 });
+         });
     </script>
 
 
