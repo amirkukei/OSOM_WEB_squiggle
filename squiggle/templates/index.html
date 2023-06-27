@@ -18,7 +18,7 @@
     <div class="toolbar" id="toolbar">
         <!--<img src=”squiggle/templates/static/images/squiggleHERO5.png”>-->
         <h1 id="branding">squiggleWEAR</h1>
-        <button id="my-gallery" onclick="location.href='{% url 'gallery' %}'">My Gallery</button>
+        <!--<button id="my-gallery" onclick="location.href='{% url 'gallery' %}'">My Gallery</button>-->
         <button id="brush">Brush: S</button>
         <label for="colorPicker"></label><input id="colorPicker" type="color" style="display: none;">
         <button id="color">Color</button>
@@ -26,12 +26,8 @@
 
        <!-- <button id="text">Text</button>-->
         <button id="clear">Clear</button>
-        <form id="save-form" method="POST" action="{% url 'save_canvas' %}">
-            {% csrf_token %}
-            <input type="hidden" id="drawing-data" name="drawing_data">
-            <button type="submit">Save</button>
-        </form>
-        <button id="load" onclick="location.href='{% url 'load_drawings' %}'" >Download</button>
+        <button id="save">Save</button>
+        <button id="load" onclick="location.href='{% url 'gallery' %}'">My Gallery</button>
         <button id="print">Print Shirt</button>
         <button id="login" onclick="location.href='{% url 'login' %}'">Login</button>
         <button id="about" onclick="location.href='{% url 'about' %}'">About</button>
@@ -49,61 +45,6 @@
     <div>
         <canvas id="drawing-board"></canvas>
     </div>
-
-    <div id="success-message" style="display: none;">
-        Drawing saved successfully!
-    </div>
-
-    <div id="error-message" style="display: none;">
-        Failed to save drawing.
-    </div>
-        <script>
-    document.getElementById('save-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Overrides the default behavior of the form
-
-        // Gets the picture data in Data URL format
-        const drawingData = canvas.toDataURL();
-
-        // Sets the picture data to a hidden form field
-        document.getElementById('drawing-data').value = drawingData;
-
-        // Submits the form to the server
-        fetch('{% url 'save_canvas' %}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: new URLSearchParams(new FormData(event.target))
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                document.getElementById('success-message').style.display = 'block';
-
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('error-message').style.display = 'block';
-
-            });
-    });
-    </script>
-    <script>
-
-         const backgroundColorButton = document.getElementById('backgroundColor');
-         backgroundColorButton.addEventListener('click', function() {
-             fetch('/get_background_color')
-                 .then(response => response.json())
-                 .then(data => {
-                     const backgroundColor = data.background_color;
-                     document.body.style.backgroundColor = backgroundColor;
-                 })
-                 .catch(error => {
-                     console.log('Error:', error);
-                 });
-         });
-    </script>
 
 
 

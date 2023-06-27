@@ -43,7 +43,7 @@ function handleSaveButtonClick() {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
         },
-        body: JSON.stringify({ drawingData: drawingData }),
+        body: JSON.stringify({ drawing_data: drawingData }),
     })
         .then(response => response.json())
         .then(data => {
@@ -96,6 +96,9 @@ toolbar.addEventListener('click', e => {
     if (e.target.id ==='brush'){
         toggleBrushSize();
     }
+    if (e.target.id ==='backgroundColor'){
+        bgColor();
+    }
 });
 
 toolbar.addEventListener('change', e => {
@@ -140,6 +143,20 @@ function showAlert() {
 }
  function onSignIn(googleUser) {
      id_token = googleUser.getAuthResponse().id_token;
+
+}function bgColor(){
+
+
+             fetch('/get_background_color')
+                 .then(response => response.json())
+                 .then(data => {
+                     const backgroundColor = data.background_color;
+                     ctx.fillStyle = backgroundColor;
+                     ctx.fillRect(0, 0, canvas.width, canvas.height);
+                 })
+                 .catch(error => {
+                     console.log('Error:', error);
+                 });
 
 }
 
