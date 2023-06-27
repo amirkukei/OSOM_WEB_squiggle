@@ -1,4 +1,5 @@
 
+const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
 
 function deleteDrawing(drawingId) {
@@ -6,7 +7,7 @@ function deleteDrawing(drawingId) {
         fetch(`/delete_drawing/${drawingId}/`, {
             method: 'DELETE',
             headers: {
-                'X-CSRFToken':  '{{ csrf_token }}'
+                'X-CSRFToken':  csrf_token
             }
         })
         .then(response => {
@@ -36,7 +37,7 @@ function renameDrawing(drawingId) {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token }}'
+                        'X-CSRFToken': csrf_token
                     },
                     body: JSON.stringify({
                         name: newName
@@ -68,7 +69,7 @@ function renameDrawing(drawingId) {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token }}'
+                        'X-CSRFToken': csrf_token
                     },
                     body: JSON.stringify({
                         name: newName

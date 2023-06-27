@@ -146,7 +146,7 @@ function showAlert() {
 
 }function bgColor(){
 
-
+//Get method
              fetch('/get_background_color')
                  .then(response => response.json())
                  .then(data => {

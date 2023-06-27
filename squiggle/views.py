@@ -1,17 +1,16 @@
 import json
-
-from django.core.serializers.json import DjangoJSONEncoder
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from .models import Design, Order, Drawing
-from .forms import LoginForm, UserRegistrationForm
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
 import requests
 import xml.etree.ElementTree as ET
-import json
+
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
+from django.http import HttpResponse
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+
+from .models import Design, Order, Drawing
+from .forms import LoginForm, UserRegistrationForm
 
 def index(request):
     if request.method == 'POST':
@@ -33,29 +32,6 @@ def get_background_color(request):
 def about(request):
     return render(request, 'about.html')
 
-
-def design_list(request):
-    designs = Design.objects.all()
-    return render(request, 'design_list.html', {'designs': designs})
-
-
-def create_order(request):
-    if request.method == 'POST':
-        return redirect('order_list')
-    else:
-        return render(request, 'create_order.html')
-
-
-def order_list(request):
-    orders = Order.objects.all()
-    return render(request, 'order_list.html', {'orders': orders})
-
-
-def view_order(request, order_id):
-    order = Order.objects.get(id=order_id)
-    return render(request, 'view_order.html', {'order': order})
-
-
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -66,10 +42,16 @@ def user_login(request):
                 login(request, user)
                 return redirect('index')
             else:
-                return HttpResponse('Something went wrong')
+                return JsonResponse({'error': 'Something went wrong'})
     else:
         form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+        serialized_form = serializers.serialize('json', form)
+        response_data = {
+            'login.html': render(request, 'login.html').content.decode('utf-8'),
+            'json': serialized_form,
+        }
+        # Return the dictionary as JSON response
+    return JsonResponse(response_data)
 
 
 def register(request):
@@ -79,10 +61,25 @@ def register(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
+            """serialized_new_user = serializers.serialize('json', new_user)
+            response_register = {
+                'register_done.html': render(request, 'register_done.html').content.decode('utf-8'),
+                'json': serialized_new_user,
+            }
+
+            # Return the dictionary as JSON response
+            return JsonResponse(response_register)"""
             return render(request, 'register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
+        """serialized_user_form = serializers.serialize('json', user_form)
+        response_userform = {
+            'register.html': render(request, 'register.html').content.decode('utf-8'),
+            'json': serialized_new_user,
+        }
+        return JsonResponse(response_userform)"""
     return render(request, 'register.html', {'user_form': user_form})
+
 
 def logout_view(request):
     logout(request)
@@ -115,9 +112,6 @@ def load_drawings(request):
     else:
         return JsonResponse({'error': 'Invalid request method'})
 
-
-from django.http import JsonResponse
-
 def delete_drawing(request, drawing_id):
     if request.method == 'DELETE':
         try:
@@ -149,5 +143,24 @@ def update_drawing(request, drawing_id):
         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
+def design_list(request):
+    designs = Design.objects.all()
+    return render(request, 'design_list.html', {'designs': designs})
 
+
+def create_order(request):
+    if request.method == 'POST':
+        return redirect('order_list')
+    else:
+        return render(request, 'create_order.html')
+
+
+def order_list(request):
+    orders = Order.objects.all()
+    return render(request, 'order_list.html', {'orders': orders})
+
+
+def view_order(request, order_id):
+    order = Order.objects.get(id=order_id)
+    return render(request, 'view_order.html', {'order': order})
 

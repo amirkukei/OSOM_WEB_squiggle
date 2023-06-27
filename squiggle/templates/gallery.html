@@ -1,13 +1,15 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>My gallery</title>
-    <link href="squiggle/templates/static/css/gallery.css">
+    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
     <link rel="icon" href="{% static 'images/squiggleICON.png' %}">
 </head>
 
 <body>
+  {% csrf_token %}
     <section class="container">
         {% for drawing in drawings %}
         <div class="drawing">
@@ -21,8 +23,7 @@
         <p>No drawings available.</p>
         {% endfor %}
     </section>
-
-</body>
+  <!-- other form fields -->
 <script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
 </body>
 </html>
