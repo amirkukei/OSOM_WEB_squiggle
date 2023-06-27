@@ -51,7 +51,7 @@ function handleSaveButtonClick() {
             if (data.success) {
                 console.log('The drawing is saved in the users gallery.');
                 // Output a message about successful save
-                window.location.href = '/gallery/';
+                //window.location.href = '/gallery/';
             } else if (data.error) {
                 console.error('Error saving picture:', data.error);
 

@@ -93,7 +93,7 @@ def logout_view(request):
 
 def save_canvas(request):
     if request.method == 'POST':
-        drawing_data = request.POST.get('drawing_data')
+        drawing_data = request.body
 
         drawing = Drawing(drawing_data=drawing_data, email=request.user.email, name="New Design")
         drawing.save()
