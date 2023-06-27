@@ -1,0 +1,23 @@
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+}
+.gallery-item {
+    width: 200px;
+    margin: 10px;
+}
+.gallery-item img {
+    width: 100%;
+    height: auto;
+}
+.delete-button {
+    cursor: pointer;
+    color: red;
+    text-decoration: underline;
+}
+
+.rename-button {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
