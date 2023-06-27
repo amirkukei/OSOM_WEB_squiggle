@@ -13,7 +13,6 @@ import xml.etree.ElementTree as ET
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 
-
 def index(request):
     if request.method == 'POST':
         return redirect('design_list')
@@ -64,10 +63,8 @@ def user_login(request):
             cd = form.cleaned_data
             user = authenticate(request, username=cd['username'], password=cd['password'])
             if user is not None:
-
                 login(request, user)
                 return redirect('index')
-
             else:
                 return HttpResponse('Something went wrong')
     else:

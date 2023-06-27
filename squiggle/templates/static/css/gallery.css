@@ -1,3 +1,10 @@
+body {
+    font-family: 'Lucida Grande', Arial, sans-serif;
+    background-color: aquamarine;
+    padding: 100px 100px;
+    color: blue;
+}
+
 .gallery {
     display: flex;
     flex-wrap: wrap;
