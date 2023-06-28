@@ -98,13 +98,16 @@ h1 {
     background-color: #f36a6a;
              }
 #google {
-    background-color: aquamarine;
+    background-color: violet;
              }
 #logout {
     background-color: violet;
              }
 #about {
     background-color: yellow;
+}
+#donate {
+    background-color: aquamarine;
 }
 .container {
     height: 100%;

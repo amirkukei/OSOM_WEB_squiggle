@@ -21,8 +21,9 @@ def index(request):
 def log_out(request):
     if user.is_authenticated:
         logout(request, user)
-        return JsonResponse({'logged_out': True})
-
+        return redirect('logged_out')
+    else:
+        return JsonResponse({'success': True})
 
 def get_background_color(request):
     if request.method == 'GET':
@@ -53,7 +54,7 @@ def user_login(request):
         form = LoginForm()
         serialized_form = serializers.serialize('json', form)
         response_data = {
-            'login.html': render(request, 'login.html').content.decode('utf-8'),
+            'login.js': render(request, 'login.js').content.decode('utf-8'),
             'json': serialized_form,
         }
         # Return the dictionary as JSON response
