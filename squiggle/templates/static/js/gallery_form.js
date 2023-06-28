@@ -1,6 +1,6 @@
 const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
 /*
-<section className="container">
     {% for drawing in drawings %}
     <div className="drawing">
         <img src="{{ drawing.drawing_data.url }}" alt="Drawing">
@@ -13,7 +13,7 @@ const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
     {% empty %}
     <p>No drawings available.</p>
     {% endfor %}
-</section>
+
 */
 
 function renderDrawings(drawings) {

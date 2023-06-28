@@ -32,7 +32,15 @@ def get_background_color(request):
             data = response.json()
             background_color = data['hex']['value']
             return JsonResponse({'background_color': background_color})
+    return JsonResponse({'error': 'Unable to fetch background color'})
 
+def get_time(request):
+    if request.method == 'GET':
+        response = requests.get('https://timeapi.io/api/Time/current/zone?timeZone=Europe/Vienna')
+        if response.status_code == 200:
+            data = response.json()
+            time = data.dateTime
+            return JsonResponse({'dateTime': time})
     return JsonResponse({'error': 'Unable to fetch background color'})
 
 
@@ -42,15 +50,19 @@ def about(request):
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
+        print("i am in the if-part of the user_login")
         if form.is_valid():
+            print("form.is_valid in the user_login")
             cd = form.cleaned_data
             user = authenticate(request, username=cd['username'], password=cd['password'])
             if user is not None:
+                print("user is not None the user_login")
                 login(request, user)
                 return redirect('index')
             else:
                 return JsonResponse({'error': 'Something went wrong'})
     else:
+        print("i am in the else-part of the user_login")
         form = LoginForm()
         serialized_form = serializers.serialize('json', form)
         response_data = {
@@ -58,8 +70,8 @@ def user_login(request):
             'json': serialized_form,
         }
         # Return the dictionary as JSON response
-    return JsonResponse(response_data)
-
+        return JsonResponse(response_data)
+    return JsonResponse({'message': 'Invalid request method'})
 
 def register(request):
     if request.method == 'POST':
