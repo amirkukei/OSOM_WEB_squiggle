@@ -8,21 +8,27 @@
     <link rel="icon" href="{% static 'images/squiggleICON.png' %}">
 </head>
 
+
 <body>
   {% csrf_token %}
-    <section class="container">
-        {% for drawing in drawings %}
-        <div class="drawing">
-            <img src="{{ drawing.drawing_data.url }}" alt="Drawing">
-            <p>Created at: {{ drawing.created_at }}</p>
-            <button class="delete-button" onclick="deleteDrawing({{ drawing.id }})">Delete</button>
-            <input class="rename-input" id="rename-input-{{ drawing.id }}" type="text" value="{{ drawing.name }}" readonly>
-            <button class="rename-button" onclick="renameDrawing({{ drawing.id }})">Rename</button>
-        </div>
-        {% empty %}
-        <p>No drawings available.</p>
-        {% endfor %}
-    </section>
+<section className="container">
+    {% for drawing in drawings %}
+    <div className="drawing">
+        <img src="{{drawing.url}}" alt="Drawing">
+            <p>Created at: {{drawing.created_at}}</p>
+            <button className="delete-button" onClick="deleteDrawing({{ drawing.id }})">Delete</button>
+            <input className="rename-input" id="rename-input-{{ drawing.id }}" type="text" value="{{ drawing.name }}"
+                   readOnly>
+                <button className="rename-button" onClick="renameDrawing({{ drawing.id }})">Rename</button>
+    </div>
+    {% empty %}
+    <p>No drawings available.</p>
+    {% endfor %}
+</section>
+  <!---section--- className="container">
+<script type="text/javascript" src="{% static 'js/gallery_form.js' %}"></script>
+
+</section--->
   <!-- other form fields -->
 <script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
 </body>

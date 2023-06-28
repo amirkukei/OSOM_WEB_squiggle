@@ -1,4 +1,3 @@
-
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 const canvas = document.getElementById('drawing-board');
 const toolbar = document.getElementById('toolbar');
@@ -159,7 +158,3 @@ function showAlert() {
                  });
 
 }
-
-
-
-

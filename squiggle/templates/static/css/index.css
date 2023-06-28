@@ -76,6 +76,9 @@ h1 {
 #color {
     background-color: hotpink;
              }
+#back{
+    background-color: orange;
+             }
 #text {
     background-color: orange;
              }
@@ -86,14 +89,20 @@ h1 {
     background-color: gold;
              }
 #load {
-    background-color: aquamarine;
+    background-color: #6CDAE7;
              }
 #print {
     background-color: #f36a6a;
              }
 #login {
+    background-color: #f36a6a;
+             }
+#google {
+    background-color: aquamarine;
+             }
+#logout {
     background-color: violet;
-}
+             }
 #about {
     background-color: yellow;
 }

@@ -18,6 +18,12 @@ def index(request):
     else:
         return render(request, 'index.html')
 
+def log_out(request):
+    if user.is_authenticated:
+        logout(request, user)
+        return JsonResponse({'logged_out': True})
+
+
 def get_background_color(request):
     if request.method == 'GET':
         response = requests.get('https://www.thecolorapi.com/random')

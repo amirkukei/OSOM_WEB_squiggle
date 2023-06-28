@@ -22,22 +22,18 @@
         <button id="brush">Brush: S</button>
         <label for="colorPicker"></label><input id="colorPicker" type="color" style="display: none;">
         <button id="color">Color</button>
-        <button id="backgroundColor">Background Color</button>
+        <button id="back">Background</button>
 
        <!-- <button id="text">Text</button>-->
         <button id="clear">Clear</button>
         <button id="save">Save</button>
         <button id="load" onclick="location.href='{% url 'gallery' %}'">My Gallery</button>
-        <button id="print">Print Shirt</button>
+        <!---button id="print">Print Shirt</button--->
         <button id="login" onclick="location.href='{% url 'login' %}'">Login</button>
+        <button id="google" onclick="location.href='{% provider_login_url 'google' %}?next=/'">login@google</button>
+        <button id="logout">Logout</button>
         <button id="about" onclick="location.href='{% url 'about' %}'">About</button>
 
-        <h2>Google Login</h2>
-    <a href="{% provider_login_url 'google' %}?next=/">Login with Google</a>
-        {% if user.is_authenticated %}
-             <p>You are signed in as {{ user.email }}</p>
-            <a href ="logout">Logout</a>
-        {% endif %}
             <img src="squiggle/templates/static/images/squiggleHERO8.png">
     </div>
 
