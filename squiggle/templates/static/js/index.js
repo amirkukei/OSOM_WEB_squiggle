@@ -95,7 +95,7 @@ toolbar.addEventListener('click', e => {
     if (e.target.id ==='brush'){
         toggleBrushSize();
     }
-    if (e.target.id ==='backgroundColor'){
+    if (e.target.id ==='back'){
         bgColor();
     }
 });
@@ -149,8 +149,8 @@ function showAlert() {
              fetch('/get_background_color')
                  .then(response => response.json())
                  .then(data => {
-                     const backgroundColor = data.background_color;
-                     ctx.fillStyle = backgroundColor;
+                     const back = data.background_color;
+                     ctx.fillStyle = back;
                      ctx.fillRect(0, 0, canvas.width, canvas.height);
                  })
                  .catch(error => {

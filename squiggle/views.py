@@ -106,7 +106,14 @@ def save_canvas(request):
 
 def gallery(request):
     drawings = Drawing.objects.filter(email=request.user.email)
+    """serialized_drawings = serializers.serialize('json', drawings)
+    response_data = {
+        'gallery.html': render(request, 'gallery.html').content.decode('utf-8'),
+        'json': serialized_drawings,
+    }
+    return JsonResponse(response_data)"""
     return render(request, 'gallery.html', {'drawings': drawings})
+
 
 
 def load_drawings(request):
@@ -152,7 +159,14 @@ def update_drawing(request, drawing_id):
 
 def design_list(request):
     designs = Design.objects.all()
+    """serialized_designs = serializers.serialize('json', designs)
+    response_data = {
+        'design_list.html': render(request, 'design_list.html').content.decode('utf-8'),
+        'json': serialized_designs,
+    }
+    return JsonResponse(response_data)"""
     return render(request, 'design_list.html', {'designs': designs})
+
 
 
 def create_order(request):
@@ -164,10 +178,23 @@ def create_order(request):
 
 def order_list(request):
     orders = Order.objects.all()
+    """serialized_orders = serializers.serialize('json', orders)
+    response_data = {
+    'order_list.html': render(request, 'order_list.html').content.decode('utf-8'),
+        'json': serialized_orders,
+    }
+    return JsonResponse(response_data)"""
     return render(request, 'order_list.html', {'orders': orders})
 
 
 def view_order(request, order_id):
     order = Order.objects.get(id=order_id)
+    """serialized_oder = serializers.serialize('json', order)
+    response_data = {
+        'view_order.html': render(request, 'view_order.html').content.decode('utf-8'),
+        'json': serialized_order,
+    }
+    return JsonResponse(response_data)"""
     return render(request, 'view_order.html', {'order': order})
+
 
