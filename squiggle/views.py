@@ -117,14 +117,25 @@ def save_canvas(request):
 
 
 def gallery(request):
-    drawings = Drawing.objects.filter(email=request.user.email)
+
+    try:
+
+        drawings = Drawing.objects.filter(email=request.user.email)
+        return render(request, 'gallery.html', {'drawings': drawings})
+    except:
+        return redirect("index")
     """serialized_drawings = serializers.serialize('json', drawings)
     response_data = {
         'gallery.html': render(request, 'gallery.html').content.decode('utf-8'),
         'json': serialized_drawings,
     }
     return JsonResponse(response_data)"""
-    return render(request, 'gallery.html', {'drawings': drawings})
+
+
+
+
+
+
 
 
 
